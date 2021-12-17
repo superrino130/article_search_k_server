@@ -127,14 +127,15 @@ def pubmed_search()
     sleep 0.5
   end
   @ids = @ids.sort[0...100].to_h
+  @ids_title = {}
   @pubmed_id[:size] = @ids.size
   @ids.each do |k, v|
     @ids[k] = keywords_count(k, v)
     sleep 0.5
   end
-  @ids.sort_by{ -_2.size }.each do |k, v|
-    @ids.delete(k) if v.size == 1 && v != ['pi+sm']
-  end
+  # @ids.sort_by{ -_2.size }.each do |k, v|
+  #   @ids.delete(k) if v.size == 1 && v != ['pi+sm']
+  # end
 end
 
 def keywords_count(id, v)
@@ -151,6 +152,7 @@ def keywords_count(id, v)
   end
   medlines.each do |x|
     s = x.ab.upcase  # abstract
+    @ids_title[id] = x.ti
   end
   @jpost_info[:keywords].each do |x|
     if s.include?(x.upcase)
@@ -182,7 +184,7 @@ def main()
     puts "pi: #{@jpost_info[:pi]}" if @jpost_info[:pi]
     puts "sm: #{@jpost_info[:sm]}" if @jpost_info[:sm]
     puts "<br>"
-    puts "[ " + @jpost_info[:keywords].join(', ') + " ]" if @jpost_info[:keywords]
+    puts "<font color='#008000'>[ " + @jpost_info[:keywords].join(', ') + " ]</font>" if @jpost_info[:keywords]
     puts "<p>"
     if @jpost_info[:createdDate]
       google_scholar(@jpost_info[:id])
@@ -202,7 +204,8 @@ def main()
           if @ids
             @ids.sort_by{ -_2.size }.each do |k, v|
               puts "<a href='http://www.ncbi.nlm.nih.gov/pubmed/' + #{k} target='_blank' rel='noopener noreferrer'>#{k}</a><br>"
-              puts "#{v}<br>"
+              puts "<font color='#800000'>#{@ids_title[k]}</font><br>"
+              puts "<font color='#008000'>#{v}</font><br>"
             end
           end
         end

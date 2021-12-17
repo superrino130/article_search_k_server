@@ -111,7 +111,7 @@ def pubmed_search()
   options = {
     'maxdate' => @pubmed_id[:maxdate],
     'mindate' => @pubmed_id[:mindate],
-    'retmax' => 100
+    'retmax' => 1000
   }
 
   if @jpost_info[:pi] != ''
@@ -126,6 +126,7 @@ def pubmed_search()
     end
     sleep 0.5
   end
+  @ids = @ids.sort_by{ _1 }[0...100]
   @pubmed_id[:size] = @ids.size
   @ids.each do |k, v|
     @ids[k] = keywords_count(k, v)

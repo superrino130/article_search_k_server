@@ -31,7 +31,7 @@ https://journals.asm.org/doi/abs/10.1128/MCB.00269-20
 # pubmed
 `PubMed`で`PI名` `SM名` `CreatedDate`の１か月前から１３か月後の`PubMed id`を取得します。
 **注意　pi/sm ともそれぞれ1000件を上限として検索しています。**
-**注意　pi/sm の件数を合算し100件を超えた場合、番号の若い順に100件として検索しています。**
+**pi/sm の件数を合算し100件を超えた場合、番号の若い順に100件として検索しています。**
 `PubMed id`から`Abstract`を取得し、`Keywords`の一致する点数を数えます。
 `Keywords`が一致しない`PubMed id`は非表示となります。
 `pi+sm`は双方の名前が論文に記載されていたケースになります。

@@ -51,7 +51,3 @@ from 2020/04/01 to 2021/06/01
 ["pi", "metabolism"]
 ```
 # 補足
-## web版
-動作確認としてのデモ版になります。
-https://sleepy-caverns-65074.herokuapp.com
-(herokuは実行時間30sオーバーでエラー発生)
